@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore di Nickname Multilingue</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        #nickname {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            padding: 0.5rem;
+            background-color: #e9e9e9;
+            border-radius: 5px;
+        }
+        button, select {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        select {
+            background-color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generatore di Nickname Multilingue</h1>
+        <select id="language" onchange="updateLabels()">
+            <option value="it">Italiano</option>
+            <option value="en">English</option>
+        </select>
+        <div id="nickname">Il tuo nickname apparirà qui</div>
+        <button onclick="generateNickname()" id="generateButton">Genera Nickname</button>
+    </div>
+
+    <script>
+        const vocabulary = {
+            it: {
+                adjectives: ['Fantastico', 'Supersonico', 'Misterioso', 'Eccentrico', 'Luminoso', 'Titanico', 'Astuto', 'Brillante'],
+                nouns: ['Lupo', 'Falco', 'Drago', 'Tigre', 'Leone', 'Aquila', 'Orso', 'Volpe'],
+                title: 'Generatore di Nickname Multilingue',
+                placeholder: 'Il tuo nickname apparirà qui',
+                button: 'Genera Nickname'
+            },
+            en: {
+                adjectives: ['Amazing', 'Supersonic', 'Mysterious', 'Eccentric', 'Bright', 'Titanic', 'Clever', 'Brilliant'],
+                nouns: ['Wolf', 'Hawk', 'Dragon', 'Tiger', 'Lion', 'Eagle', 'Bear', 'Fox'],
+                title: 'Multilingual Nickname Generator',
+                placeholder: 'Your nickname will appear here',
+                button: 'Generate Nickname'
+            }
+        };
+
+        function updateLabels() {
+            const lang = document.getElementById('language').value;
+            document.title = vocabulary[lang].title;
+            document.querySelector('h1').textContent = vocabulary[lang].title;
+            document.getElementById('nickname').textContent = vocabulary[lang].placeholder;
+            document.getElementById('generateButton').textContent = vocabulary[lang].button;
+        }
+
+        function generateNickname() {
+            const lang = document.getElementById('language').value;
+            const adjectives = vocabulary[lang].adjectives;
+            const nouns = vocabulary[lang].nouns;
+            const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+            const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+            const randomNumber = Math.floor(Math.random() * 100);
+            const nickname = `${randomAdjective}${randomNoun}${randomNumber}`;
+            document.getElementById('nickname').innerText = nickname;
+        }
+
+        // Inizializza le etichette
+        updateLabels();
+    </script>
+</body>
+</html>
